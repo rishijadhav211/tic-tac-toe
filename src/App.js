@@ -1,16 +1,5 @@
 import { useState } from 'react';
 
-
-// const YourComponent = () => {
-//   return (
-//     <div className="center-container">
-      
-//     </div>
-//   );
-// };
-
-// export default YourComponent;
-
 function Square({ value, onSquareClick }) {
     const buttonStyle = {
         padding: '15px 30px', // Adjust the padding to set the size
@@ -25,6 +14,7 @@ function Square({ value, onSquareClick }) {
 }
 
 function Board({ xIsNext, squares, onPlay }) {
+
   function handleClick(i) {
     if (calculateWinner(squares) || squares[i]) {
       return;
@@ -71,6 +61,8 @@ function Board({ xIsNext, squares, onPlay }) {
 }
 
 export default function Game() {
+
+
   const [history, setHistory] = useState([Array(9).fill(null)]);
   const [currentMove, setCurrentMove] = useState(0);
   const xIsNext = currentMove % 2 === 0;
@@ -83,7 +75,12 @@ export default function Game() {
   }
 
   function jumpTo(nextMove) {
+    
+    const nextHistory= [...history.slice(0,nextMove+1)];
+    console.log(nextHistory);
+    setHistory(nextHistory);// added functionality to delete history
     setCurrentMove(nextMove);
+    
   }
 
   const moves = history.map((squares, move) => {
